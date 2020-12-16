@@ -35,7 +35,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
             }
 
             var loaiSPModels = await _context.LoaiSanPham
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.MaLoai == id);
             if (loaiSPModels == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,ten")] LoaiSPModels loaiSPModels)
+        public async Task<IActionResult> Create([Bind("MaLoai,Ten")] LoaiSPModels loaiSPModels)
         {
             if (ModelState.IsValid)
             {
@@ -87,9 +87,9 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,ten")] LoaiSPModels loaiSPModels)
+        public async Task<IActionResult> Edit(int id, [Bind("MaLoai,Ten")] LoaiSPModels loaiSPModels)
         {
-            if (id != loaiSPModels.id)
+            if (id != loaiSPModels.MaLoai)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LoaiSPModelsExists(loaiSPModels.id))
+                    if (!LoaiSPModelsExists(loaiSPModels.MaLoai))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
             }
 
             var loaiSPModels = await _context.LoaiSanPham
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.MaLoai == id);
             if (loaiSPModels == null)
             {
                 return NotFound();
@@ -148,7 +148,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
 
         private bool LoaiSPModelsExists(int id)
         {
-            return _context.LoaiSanPham.Any(e => e.id == id);
+            return _context.LoaiSanPham.Any(e => e.MaLoai == id);
         }
     }
 }
