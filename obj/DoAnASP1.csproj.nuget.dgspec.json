@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\CDTH18D\\ASP\\DoAn\\DoAnASP.NET1\\DoAnASP.NET1\\DoAnASP1.csproj": {}
+    "D:\\HỌC KỲ 5\\DoAnAsp\\DoAnASP\\DoAnASP1.csproj": {}
   },
   "projects": {
-    "D:\\CDTH18D\\ASP\\DoAn\\DoAnASP.NET1\\DoAnASP.NET1\\DoAnASP1.csproj": {
+    "D:\\HỌC KỲ 5\\DoAnAsp\\DoAnASP\\DoAnASP1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\CDTH18D\\ASP\\DoAn\\DoAnASP.NET1\\DoAnASP.NET1\\DoAnASP1.csproj",
+        "projectUniqueName": "D:\\HỌC KỲ 5\\DoAnAsp\\DoAnASP\\DoAnASP1.csproj",
         "projectName": "DoAnASP1",
-        "projectPath": "D:\\CDTH18D\\ASP\\DoAn\\DoAnASP.NET1\\DoAnASP.NET1\\DoAnASP1.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\CDTH18D\\ASP\\DoAn\\DoAnASP.NET1\\DoAnASP.NET1\\obj\\",
+        "projectPath": "D:\\HỌC KỲ 5\\DoAnAsp\\DoAnASP\\DoAnASP1.csproj",
+        "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
+        "outputPath": "D:\\HỌC KỲ 5\\DoAnAsp\\DoAnASP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "http://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
