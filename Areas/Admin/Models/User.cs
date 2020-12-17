@@ -13,6 +13,5 @@ namespace DoAnASP1.Areas.Admin.Models
         public string UserName { get; set; }
         public string PassWord { get; set; }
         public string TrangThai { get; set; }
-        public ICollection<HoaDon> lstHoaDon { get; set; } 
     }
 }

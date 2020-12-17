@@ -11,12 +11,13 @@ namespace DoAnASP1.Areas.Admin.Models
     {
         [Key]
         public int IdComment { get; set; }
-        [ForeignKey("UserID")]
         public int UserId { get; set; }
-        [ForeignKey("MaSP")]
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
         public int MaSP { get; set; }
+        [ForeignKey("MaSP")]
+        public virtual SanPhamModels SanPham { get; set; }
         public string NoiDung { get; set; }
         public string Time { get; set; }
-        public virtual SanPhamModels SanPham { get; set; }
     }
 }

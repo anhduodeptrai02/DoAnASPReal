@@ -11,90 +11,90 @@ using DoAnASP1.Areas.Admin.Models;
 namespace DoAnASP1.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HoaDonsController : Controller
+    public class CommentsController : Controller
     {
         private readonly DPcontext _context;
 
-        public HoaDonsController(DPcontext context)
+        public CommentsController(DPcontext context)
         {
             _context = context;
         }
 
-        // GET: Admin/HoaDons
+        // GET: Admin/Comments
         public async Task<IActionResult> Index()
         {
-            var dPcontext = _context.HoaDon.Include(h => h.User);
+            var dPcontext = _context.Comment.Include(c => c.SanPham);
             return View(await dPcontext.ToListAsync());
         }
 
-        // GET: Admin/HoaDons/Details/5
-        public async Task<IActionResult> Details(string id)
+        // GET: Admin/Comments/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var hoaDon = await _context.HoaDon
-                .Include(h => h.User)
-                .FirstOrDefaultAsync(m => m.MaHD == id);
-            if (hoaDon == null)
+            var comment = await _context.Comment
+                .Include(c => c.SanPham)
+                .FirstOrDefaultAsync(m => m.IdComment == id);
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            return View(hoaDon);
+            return View(comment);
         }
 
-        // GET: Admin/HoaDons/Create
+        // GET: Admin/Comments/Create
         public IActionResult Create()
         {
-            ViewData["UserID"] = new SelectList(_context.User, "UserId", "UserId");
+            ViewData["MaSP"] = new SelectList(_context.SanPham, "MaSP", "MaSP");
             return View();
         }
 
-        // POST: Admin/HoaDons/Create
+        // POST: Admin/Comments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaHD,TongTien,UserID")] HoaDon hoaDon)
+        public async Task<IActionResult> Create([Bind("IdComment,UserId,MaSP,NoiDung,Time")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(hoaDon);
+                _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserID"] = new SelectList(_context.User, "UserId", "UserId", hoaDon.UserID);
-            return View(hoaDon);
+            ViewData["MaSP"] = new SelectList(_context.SanPham, "MaSP", "MaSP", comment.MaSP);
+            return View(comment);
         }
 
-        // GET: Admin/HoaDons/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        // GET: Admin/Comments/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var hoaDon = await _context.HoaDon.FindAsync(id);
-            if (hoaDon == null)
+            var comment = await _context.Comment.FindAsync(id);
+            if (comment == null)
             {
                 return NotFound();
             }
-            ViewData["UserID"] = new SelectList(_context.User, "UserId", "UserId", hoaDon.UserID);
-            return View(hoaDon);
+            ViewData["MaSP"] = new SelectList(_context.SanPham, "MaSP", "MaSP", comment.MaSP);
+            return View(comment);
         }
 
-        // POST: Admin/HoaDons/Edit/5
+        // POST: Admin/Comments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("MaHD,TongTien,UserID")] HoaDon hoaDon)
+        public async Task<IActionResult> Edit(int id, [Bind("IdComment,UserId,MaSP,NoiDung,Time")] Comment comment)
         {
-            if (id != hoaDon.MaHD)
+            if (id != comment.IdComment)
             {
                 return NotFound();
             }
@@ -103,12 +103,12 @@ namespace DoAnASP1.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(hoaDon);
+                    _context.Update(comment);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HoaDonExists(hoaDon.MaHD))
+                    if (!CommentExists(comment.IdComment))
                     {
                         return NotFound();
                     }
@@ -119,43 +119,43 @@ namespace DoAnASP1.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserID"] = new SelectList(_context.User, "UserId", "UserId", hoaDon.UserID);
-            return View(hoaDon);
+            ViewData["MaSP"] = new SelectList(_context.SanPham, "MaSP", "MaSP", comment.MaSP);
+            return View(comment);
         }
 
-        // GET: Admin/HoaDons/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        // GET: Admin/Comments/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var hoaDon = await _context.HoaDon
-                .Include(h => h.User)
-                .FirstOrDefaultAsync(m => m.MaHD == id);
-            if (hoaDon == null)
+            var comment = await _context.Comment
+                .Include(c => c.SanPham)
+                .FirstOrDefaultAsync(m => m.IdComment == id);
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            return View(hoaDon);
+            return View(comment);
         }
 
-        // POST: Admin/HoaDons/Delete/5
+        // POST: Admin/Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var hoaDon = await _context.HoaDon.FindAsync(id);
-            _context.HoaDon.Remove(hoaDon);
+            var comment = await _context.Comment.FindAsync(id);
+            _context.Comment.Remove(comment);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HoaDonExists(string id)
+        private bool CommentExists(int id)
         {
-            return _context.HoaDon.Any(e => e.MaHD == id);
+            return _context.Comment.Any(e => e.IdComment == id);
         }
     }
 }

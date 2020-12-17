@@ -13,13 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.TongTien)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MaCTHD)
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th></th>
         </tr>
@@ -28,13 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.UserID)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.TongTien)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaCTHD)
+                @Html.DisplayFor(modelItem => item.User.UserId)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.MaHD">Edit</a> |

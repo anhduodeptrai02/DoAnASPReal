@@ -11,22 +11,22 @@ using DoAnASP1.Areas.Admin.Models;
 namespace DoAnASP1.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class CTHoaDonsController : Controller
+    public class UsersController : Controller
     {
         private readonly DPcontext _context;
 
-        public CTHoaDonsController(DPcontext context)
+        public UsersController(DPcontext context)
         {
             _context = context;
         }
 
-        // GET: Admin/CTHoaDons
+        // GET: Admin/Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CTHoaDon.ToListAsync());
+            return View(await _context.User.ToListAsync());
         }
 
-        // GET: Admin/CTHoaDons/Details/5
+        // GET: Admin/Users/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +34,39 @@ namespace DoAnASP1.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var cTHoaDon = await _context.CTHoaDon
-                .FirstOrDefaultAsync(m => m.MaCTHD == id);
-            if (cTHoaDon == null)
+            var user = await _context.User
+                .FirstOrDefaultAsync(m => m.UserId == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(cTHoaDon);
+            return View(user);
         }
 
-        // GET: Admin/CTHoaDons/Create
+        // GET: Admin/Users/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Admin/CTHoaDons/Create
+        // POST: Admin/Users/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaCTHD,MaSP,SoLuong,ThanhTien")] CTHoaDon cTHoaDon)
+        public async Task<IActionResult> Create([Bind("UserId,UserName,PassWord,TrangThai")] User user)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(cTHoaDon);
+                _context.Add(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cTHoaDon);
+            return View(user);
         }
 
-        // GET: Admin/CTHoaDons/Edit/5
+        // GET: Admin/Users/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace DoAnASP1.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var cTHoaDon = await _context.CTHoaDon.FindAsync(id);
-            if (cTHoaDon == null)
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
-            return View(cTHoaDon);
+            return View(user);
         }
 
-        // POST: Admin/CTHoaDons/Edit/5
+        // POST: Admin/Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaCTHD,MaSP,SoLuong,ThanhTien")] CTHoaDon cTHoaDon)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,UserName,PassWord,TrangThai")] User user)
         {
-            if (id != cTHoaDon.MaCTHD)
+            if (id != user.UserId)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace DoAnASP1.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(cTHoaDon);
+                    _context.Update(user);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CTHoaDonExists(cTHoaDon.MaCTHD))
+                    if (!UserExists(user.UserId))
                     {
                         return NotFound();
                     }
@@ -114,10 +114,10 @@ namespace DoAnASP1.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(cTHoaDon);
+            return View(user);
         }
 
-        // GET: Admin/CTHoaDons/Delete/5
+        // GET: Admin/Users/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +125,30 @@ namespace DoAnASP1.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var cTHoaDon = await _context.CTHoaDon
-                .FirstOrDefaultAsync(m => m.MaCTHD == id);
-            if (cTHoaDon == null)
+            var user = await _context.User
+                .FirstOrDefaultAsync(m => m.UserId == id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return View(cTHoaDon);
+            return View(user);
         }
 
-        // POST: Admin/CTHoaDons/Delete/5
+        // POST: Admin/Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cTHoaDon = await _context.CTHoaDon.FindAsync(id);
-            _context.CTHoaDon.Remove(cTHoaDon);
+            var user = await _context.User.FindAsync(id);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CTHoaDonExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.CTHoaDon.Any(e => e.MaCTHD == id);
+            return _context.User.Any(e => e.UserId == id);
         }
     }
 }

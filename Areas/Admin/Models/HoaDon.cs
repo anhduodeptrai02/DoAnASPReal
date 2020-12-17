@@ -11,14 +11,10 @@ namespace DoAnASP1.Areas.Admin.Models
     {
         [Key]
         public string MaHD { get; set; }
-        [ForeignKey("UserID")]
-        public int UserID { get; set; }
-      
         public string TongTien { get; set; }
-       
-        [ForeignKey("MaCTHD")]
-        public int MaCTHD { get; set; }
-        public ICollection<CTHoaDon> CTHoaDon { get; set; }
+        public int UserID { get; set; }
+        [ForeignKey("UserID")]
+        public User User { get; set; }
     }
 
 }

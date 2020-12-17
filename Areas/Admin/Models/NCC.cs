@@ -8,7 +8,7 @@ namespace DoAnASP1.Areas.Admin.Models
 {
     public class NCC
     { 
-        
+        [Key]
         public int ID { get; set; }
         public string TenNCC { get; set; }
         public string DiaChi { get; set; }

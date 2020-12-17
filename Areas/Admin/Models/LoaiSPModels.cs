@@ -14,7 +14,8 @@ namespace DoAnASP1.Areas.Admin.Models
         public string Ten { get; set; }
         public int MaNCC { get; set; }
         [ForeignKey("MaNCC")]
-        public ICollection<SanPhamModels> LstSanPham { get; set; }
         public virtual NCC NCC { get; set; }
+
+        public ICollection<SanPhamModels> LstSanPham { get; set; }
     }
 }
