@@ -15,6 +15,10 @@ namespace DoAnASP1.Areas.Admin.Data
 
         public DbSet<SanPhamModels> SanPham { get; set; }
         public DbSet<LoaiSPModels> LoaiSanPham { get; set; }
+        public DbSet<NCC> NCC { get; set; }
+        public DbSet<DoAnASP1.Areas.Admin.Models.User> User { get; set; }
+        public DbSet<DoAnASP1.Areas.Admin.Models.HoaDon> HoaDon { get; set; }
+        public DbSet<DoAnASP1.Areas.Admin.Models.Comment> Comment { get; set; }
 
     }
 }

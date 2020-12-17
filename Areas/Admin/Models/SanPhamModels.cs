@@ -29,7 +29,6 @@ namespace DoAnASP1.Areas.Admin.Models
         public int MaLoai { get; set; }
         [ForeignKey("MaLoai")]
         public LoaiSPModels LoaiSP { get; set; }
-        public ICollection<SanPhamModels> LSP { get; set; }
 
     }
 }

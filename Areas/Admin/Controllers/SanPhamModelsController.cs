@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DoAnASP1.Areas.Admin.Data;
 using DoAnASP1.Areas.Admin.Models;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace DoAnASP1.Areas.Admin.Controllers
 {
@@ -49,7 +51,8 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // GET: Admin/SanPhamModels/Create
         public IActionResult Create()
         {
-            ViewData["MaLoai"] = new SelectList(_context.LoaiSanPham, "MaLoai", "MaLoai");
+            //ViewData["tenloai"] = new SelectList(_context.LoaiSanPham, "id", "ten");
+            ViewData["Ten"] = new SelectList(_context.LoaiSanPham, "MaLoai", "Ten");
             return View();
         }
 
@@ -58,11 +61,20 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaSP,TenSP,NgaySX,Hinh,MoTa,Gia,TrangThai,MaLoai")] SanPhamModels sanPhamModels)
+        public async Task<IActionResult> Create([Bind("MaSP,TenSP,NgaySX,Hinh,MoTa,Gia,TrangThai,MaLoai")] SanPhamModels sanPhamModels, IFormFile ful)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(sanPhamModels);
+                await _context.SaveChangesAsync();
+                var path = Path.Combine(
+                    Directory.GetCurrentDirectory(), "wwwroot/img/product", sanPhamModels.MaSP + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await ful.CopyToAsync(stream);
+                }
+                sanPhamModels.Hinh = sanPhamModels.MaSP + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
+                _context.Update(sanPhamModels);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

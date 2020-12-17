@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dkUKfVMq2dLPJqY6PmSI+GvLNgwn98c5bS0P5IAcarn5vC8Kk5aykxSVTe6dC0wxJcDHDQW2unegzuIA3ugnLw==",
+  "dgSpecHash": "wbrr7Oaxhd5pFjWIqvtOapJ4Roj4IwNAboNvlbwVt9inuz/i5F7Er4d1b2Cs1KlgM1Dr6D7G91/dEfhub7pm+g==",
   "success": true,
-  "projectFilePath": "D:\\HỌC KỲ 5\\DoAnAsp\\DoAnASP\\DoAnASP1.csproj",
+  "projectFilePath": "D:\\HỌC KỲ 5\\DoANREAL\\DoAnASP\\DoAnASP1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

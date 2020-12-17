@@ -47,6 +47,8 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // GET: Admin/LoaiSPModels/Create
         public IActionResult Create()
         {
+
+            ViewData["TenNCC"] = new SelectList(_context.NCC, "ID", "TenNCC");
             return View();
         }
 
