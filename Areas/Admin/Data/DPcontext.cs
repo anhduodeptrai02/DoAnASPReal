@@ -19,6 +19,7 @@ namespace DoAnASP1.Areas.Admin.Data
         public DbSet<DoAnASP1.Areas.Admin.Models.User> User { get; set; }
         public DbSet<DoAnASP1.Areas.Admin.Models.HoaDon> HoaDon { get; set; }
         public DbSet<DoAnASP1.Areas.Admin.Models.Comment> Comment { get; set; }
+        public DbSet<DoAnASP1.Areas.Admin.Models.CTHD> CTHD { get; set; }
 
     }
 }

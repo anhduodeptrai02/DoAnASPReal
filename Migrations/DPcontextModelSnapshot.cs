@@ -19,6 +19,35 @@ namespace DoAnASP1.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.1");
 
+            modelBuilder.Entity("DoAnASP1.Areas.Admin.Models.CTHD", b =>
+                {
+                    b.Property<int>("MaCTHD")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("MaHD")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaSP")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SanPhamMaSP")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SoLuong")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ThanhTien")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MaCTHD");
+
+                    b.HasIndex("SanPhamMaSP");
+
+                    b.ToTable("CTHD");
+                });
+
             modelBuilder.Entity("DoAnASP1.Areas.Admin.Models.Comment", b =>
                 {
                     b.Property<int>("IdComment")
@@ -52,6 +81,9 @@ namespace DoAnASP1.Migrations
                     b.Property<string>("MaHD")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("CTHDMaCTHD")
+                        .HasColumnType("int");
+
                     b.Property<string>("TongTien")
                         .HasColumnType("nvarchar(max)");
 
@@ -59,6 +91,8 @@ namespace DoAnASP1.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("MaHD");
+
+                    b.HasIndex("CTHDMaCTHD");
 
                     b.HasIndex("UserID");
 
@@ -163,6 +197,15 @@ namespace DoAnASP1.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("DoAnASP1.Areas.Admin.Models.CTHD", b =>
+                {
+                    b.HasOne("DoAnASP1.Areas.Admin.Models.SanPhamModels", "SanPham")
+                        .WithMany()
+                        .HasForeignKey("SanPhamMaSP");
+
+                    b.Navigation("SanPham");
+                });
+
             modelBuilder.Entity("DoAnASP1.Areas.Admin.Models.Comment", b =>
                 {
                     b.HasOne("DoAnASP1.Areas.Admin.Models.SanPhamModels", "SanPham")
@@ -184,11 +227,17 @@ namespace DoAnASP1.Migrations
 
             modelBuilder.Entity("DoAnASP1.Areas.Admin.Models.HoaDon", b =>
                 {
+                    b.HasOne("DoAnASP1.Areas.Admin.Models.CTHD", "CTHD")
+                        .WithMany("HoaDon")
+                        .HasForeignKey("CTHDMaCTHD");
+
                     b.HasOne("DoAnASP1.Areas.Admin.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CTHD");
 
                     b.Navigation("User");
                 });
@@ -213,6 +262,11 @@ namespace DoAnASP1.Migrations
                         .IsRequired();
 
                     b.Navigation("LoaiSP");
+                });
+
+            modelBuilder.Entity("DoAnASP1.Areas.Admin.Models.CTHD", b =>
+                {
+                    b.Navigation("HoaDon");
                 });
 
             modelBuilder.Entity("DoAnASP1.Areas.Admin.Models.LoaiSPModels", b =>
