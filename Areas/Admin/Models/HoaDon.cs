@@ -15,6 +15,7 @@ namespace DoAnASP1.Areas.Admin.Models
         public int UserID { get; set; }
         [ForeignKey("UserID")]
         public User User { get; set; }
+        public CTHD CTHD { get; set; }
     }
 
 }

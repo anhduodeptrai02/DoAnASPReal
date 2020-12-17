@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DoAnASP1.Migrations
 {
-    public partial class update : Migration
+    public partial class CTHD : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,25 +54,6 @@ namespace DoAnASP1.Migrations
                         column: x => x.MaNCC,
                         principalTable: "NCC",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "HoaDon",
-                columns: table => new
-                {
-                    MaHD = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TongTien = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HoaDon", x => x.MaHD);
-                    table.ForeignKey(
-                        name: "FK_HoaDon_User_UserID",
-                        column: x => x.UserID,
-                        principalTable: "User",
-                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -129,6 +110,55 @@ namespace DoAnASP1.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CTHD",
+                columns: table => new
+                {
+                    MaCTHD = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaHD = table.Column<int>(type: "int", nullable: false),
+                    MaSP = table.Column<int>(type: "int", nullable: false),
+                    SoLuong = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ThanhTien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SanPhamMaSP = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CTHD", x => x.MaCTHD);
+                    table.ForeignKey(
+                        name: "FK_CTHD_SanPham_SanPhamMaSP",
+                        column: x => x.SanPhamMaSP,
+                        principalTable: "SanPham",
+                        principalColumn: "MaSP",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HoaDon",
+                columns: table => new
+                {
+                    MaHD = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TongTien = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserID = table.Column<int>(type: "int", nullable: false),
+                    CTHDMaCTHD = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HoaDon", x => x.MaHD);
+                    table.ForeignKey(
+                        name: "FK_HoaDon_CTHD_CTHDMaCTHD",
+                        column: x => x.CTHDMaCTHD,
+                        principalTable: "CTHD",
+                        principalColumn: "MaCTHD",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HoaDon_User_UserID",
+                        column: x => x.UserID,
+                        principalTable: "User",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Comment_MaSP",
                 table: "Comment",
@@ -138,6 +168,16 @@ namespace DoAnASP1.Migrations
                 name: "IX_Comment_UserId",
                 table: "Comment",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CTHD_SanPhamMaSP",
+                table: "CTHD",
+                column: "SanPhamMaSP");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HoaDon_CTHDMaCTHD",
+                table: "HoaDon",
+                column: "CTHDMaCTHD");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HoaDon_UserID",
@@ -164,10 +204,13 @@ namespace DoAnASP1.Migrations
                 name: "HoaDon");
 
             migrationBuilder.DropTable(
-                name: "SanPham");
+                name: "CTHD");
 
             migrationBuilder.DropTable(
                 name: "User");
+
+            migrationBuilder.DropTable(
+                name: "SanPham");
 
             migrationBuilder.DropTable(
                 name: "LoaiSanPham");
