@@ -664,6 +664,11 @@ D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Comments\Details.cshtml.g.cs
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Comments\Edit.cshtml.g.cs
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\Comments\Index.cshtml.g.cs
+D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Create.cshtml.g.cs
+D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Delete.cshtml.g.cs
+D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Details.cshtml.g.cs
+D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Edit.cshtml.g.cs
+D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Index.cshtml.g.cs
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\HoaDons\Create.cshtml.g.cs
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\HoaDons\Delete.cshtml.g.cs
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\HoaDons\Details.cshtml.g.cs
@@ -715,8 +720,3 @@ D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\DoAnASP1.dll
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\DoAnASP1.pdb
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\DoAnASP1.genruntimeconfig.cache
 D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\DoAnASP1.csprojAssemblyReference.cache
-D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Create.cshtml.g.cs
-D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Delete.cshtml.g.cs
-D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Details.cshtml.g.cs
-D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Edit.cshtml.g.cs
-D:\HỌC KỲ 5\DoANREAL\DoAnASP\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\CTHDs\Index.cshtml.g.cs

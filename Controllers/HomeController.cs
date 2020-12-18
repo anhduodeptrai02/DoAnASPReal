@@ -6,21 +6,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DoAnASP.NET1.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using DoAnASP1.Areas.Admin.Data;
+using DoAnASP1.Areas.Admin.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoAnASP.NET1.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DPcontext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(DPcontext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+
+            var dPcontext = _context.SanPham.Include(s => s.LoaiSP);
+            return View(await dPcontext.ToListAsync());
         }
 
         public IActionResult Privacy()

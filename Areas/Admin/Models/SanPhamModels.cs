@@ -20,7 +20,7 @@ namespace DoAnASP1.Areas.Admin.Models
         [Column(TypeName = "nvarchar(255")]
         public string Hinh { get; set; }
         public string MoTa { get; set; }
-        [Range(100, 1000000)]
+        [Range(100, 1000000000)]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18,2")]
         public decimal Gia { get; set; }
