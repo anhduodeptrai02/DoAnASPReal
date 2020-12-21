@@ -109,6 +109,9 @@ namespace DoAnASP1.Migrations
                     b.Property<int>("MaNCC")
                         .HasColumnType("int");
 
+                    b.Property<int>("TT")
+                        .HasColumnType("int");
+
                     b.Property<string>("Ten")
                         .HasColumnType("nvarchar(max)");
 
