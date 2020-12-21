@@ -23,7 +23,14 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // GET: Admin/LoaiSPModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.LoaiSanPham.ToListAsync());
+            var DsLoaiSanPham = from m in _context.LoaiSanPham
+                                select m;
+            ViewBag.DsLoaiSP = DsLoaiSanPham;
+            ViewData["NhaCungCap"] = new SelectList(_context.Set<NCC>(), "ID", "ID");
+            return View();
+            //ViewData["MaNCC"] = new SelectList(_context.NCC, "ID", "TenNCC");
+            //var dPcontext = _context.LoaiSanPham.Include(l => l.NCC);
+            //return View(await dPcontext.ToListAsync());
         }
 
         // GET: Admin/LoaiSPModels/Details/5
@@ -35,6 +42,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
             }
 
             var loaiSPModels = await _context.LoaiSanPham
+                .Include(l => l.NCC)
                 .FirstOrDefaultAsync(m => m.MaLoai == id);
             if (loaiSPModels == null)
             {
@@ -47,8 +55,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // GET: Admin/LoaiSPModels/Create
         public IActionResult Create()
         {
-
-            ViewData["TenNCC"] = new SelectList(_context.NCC, "ID", "TenNCC");
+            ViewData["MaNCC"] = new SelectList(_context.NCC, "ID", "TenNCC");
             return View();
         }
 
@@ -57,7 +64,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MaLoai,Ten,MaNCC")] LoaiSPModels loaiSPModels)
+        public async Task<IActionResult> Create([Bind("MaLoai,Ten,TT,MaNCC")] LoaiSPModels loaiSPModels)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +72,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["MaNCC"] = new SelectList(_context.NCC, "ID", "ID", loaiSPModels.MaNCC);
             return View(loaiSPModels);
         }
 
@@ -81,6 +89,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
             {
                 return NotFound();
             }
+            ViewData["MaNCC"] = new SelectList(_context.NCC, "ID", "ID", loaiSPModels.MaNCC);
             return View(loaiSPModels);
         }
 
@@ -89,7 +98,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaLoai,Ten")] LoaiSPModels loaiSPModels)
+        public async Task<IActionResult> Edit(int id, [Bind("MaLoai,Ten,TT,MaNCC")] LoaiSPModels loaiSPModels)
         {
             if (id != loaiSPModels.MaLoai)
             {
@@ -116,6 +125,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["MaNCC"] = new SelectList(_context.NCC, "ID", "ID", loaiSPModels.MaNCC);
             return View(loaiSPModels);
         }
 
@@ -128,6 +138,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
             }
 
             var loaiSPModels = await _context.LoaiSanPham
+                .Include(l => l.NCC)
                 .FirstOrDefaultAsync(m => m.MaLoai == id);
             if (loaiSPModels == null)
             {

@@ -25,7 +25,8 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // GET: Admin/SanPhamModels
         public async Task<IActionResult> Index()
         {
-            var dPcontext = _context.SanPham.Include(s => s.LoaiSP);
+
+            var dPcontext = _context.SanPham.Where(m => m.TrangThai==1);
             return View(await dPcontext.ToListAsync());
         }
 

@@ -12,6 +12,7 @@ namespace DoAnASP1.Areas.Admin.Models
         [Key]
         public int MaLoai { get; set; }
         public string Ten { get; set; }
+        public int TT { get; set; }
         public int MaNCC { get; set; }
         [ForeignKey("MaNCC")]
         public virtual NCC NCC { get; set; }
