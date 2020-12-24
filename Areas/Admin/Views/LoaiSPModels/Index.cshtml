@@ -58,11 +58,11 @@
     <script>
         function addLoaiSP() {
             var insert = {};
-            insert.TenLoai = $("#tenloai").val();
-            insert.NhaCungCap = parseInt($("#ncc").val());
-            insert.TrangThai = $("#trangthai").val();
+            insert.Ten = $("#tenloai").val();
+            insert.MaNCC = parseInt($("#ncc").val());
+            insert.TT = parseInt($("#trangthai").val());
             $.ajax({
-                url: "../../api/LoaiSanPhamApi/PostLoaiSanPhamModel",
+                url: "../../API/LoaiSPModels/PostLoaiSPModels",
                 type: "POST",
                 contentType: "Application/json;charset-utf-8",
                 data: JSON.stringify(insert),
@@ -76,15 +76,16 @@
         }
         function getLoaiSP(id) {
             $.ajax({
-                url: "../../api/LoaiSanPhamApi/GetLoaiSanPhamModel/" + id,
+                url: "../../API/LoaiSPModels/GetLoaiSPModels/" + id,
                 type: "GET",
                 contentType: "Application/json;charset-utf-8",
                 dataType: "json"
             }).done(function (reponse) {
-                $("#edit_id").val(reponse.id);
-                $("#edit_tenloai").val(reponse.tenLoai);
-                $("#edit_ncc").val(reponse.nhaCungCap);
-                $("#edit_trangthai").val(reponse.trangThai);
+                console.log(reponse);
+                $("#edit_id").val(reponse.maLoai);
+                $("#edit_tenloai").val(reponse.ten);
+                $("#edit_ncc").val(reponse.maNCC);
+                $("#edit_trangthai").val(reponse.tt);
 
             }).fail(function () {
                 alert('Thất bại !');
@@ -92,12 +93,12 @@
         }
         function updateLoaiSP(id) {
             var update = {}
-            update.ID = parseInt(id);
-            update.TenLoai = $("#edit_tenloai").val();
-            update.NhaCungCap = parseInt($("#edit_ncc").val());
-            update.TrangThai = $("#edit_trangthai").val();
+            update.MaLoai = parseInt(id);
+            update.Ten = $("#edit_tenloai").val();
+            update.MaNCC = parseInt($("#edit_ncc").val());
+            update.TT = parseInt($("#edit_trangthai").val());
             $.ajax({
-                url: "../../api/LoaiSanPhamApi/PutLoaiSanPhamModel/" + id,
+                url: "../../api/LoaiSPModels/PutLoaiSPModels/" + id,
                 type: "PUT",
                 contentType: "Application/json;charset-utf-8",
                 data: JSON.stringify(update),
@@ -112,7 +113,7 @@
         function deleteLoaiSP(id) {
 
             $.ajax({
-                url: "../../api/LoaiSanPhamApi/DeleteLoaiSanPhamModel/" + id,
+                url: "../../api/LoaiSPModels/DeleteLoaiSPModels/" + id,
                 type: "DELETE",
                 contentType: "Application/json;charset-utf-8",
                 dataType: "json"

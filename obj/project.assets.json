@@ -8952,11 +8952,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HỌC KỲ 5\\DoANREAL\\DoAnASP\\DoAnASP1.csproj",
+      "projectUniqueName": "D:\\HỌC KỲ 5\\ASP24-12\\DoAnASP\\DoAnASP1.csproj",
       "projectName": "DoAnASP1",
-      "projectPath": "D:\\HỌC KỲ 5\\DoANREAL\\DoAnASP\\DoAnASP1.csproj",
+      "projectPath": "D:\\HỌC KỲ 5\\ASP24-12\\DoAnASP\\DoAnASP1.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "D:\\HỌC KỲ 5\\DoANREAL\\DoAnASP\\obj\\",
+      "outputPath": "D:\\HỌC KỲ 5\\ASP24-12\\DoAnASP\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
