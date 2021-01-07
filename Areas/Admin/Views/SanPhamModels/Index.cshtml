@@ -1,13 +1,11 @@
-﻿@model IEnumerable<DoAnASP1.Areas.Admin.Models.SanPhamModels>
+﻿@model DoAnASP1.Areas.Admin.Models.SanPhamModels
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a> 
 </p>
 <table class="table">
     <thead>
@@ -37,35 +35,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenSP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgaySX)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Hinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MoTa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiSP.MaLoai)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MaSP">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MaSP">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MaSP">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in ViewBag.DSSanPham)
+        {
+<tr>
+    <td>
+        @item.TenSP
+    </td>
+    <td>
+        @item.NgaySX
+    </td>
+    <td>
+        @item.Hinh
+    </td>
+    <td>
+        @item.MoTa
+    </td>
+    <td>
+        @item.Gia
+    </td>
+    <td>
+        @item.TrangThai
+    </td>
+    <td>
+        @item.MaLoai
+    </td>
+    <td>
+        <button type="button" class="btn btn-primary" name="btn_edit_sp" id-idsp="@item.MaSP" data-toggle="modal" data-target="#SuaSP">Sửa</button>
+        <button type="button" class="btn btn-primary" name="btn_delete_sp" id-idsp="@item.MaSP" data-toggle="modal">Xóa</button>
+    </td>
+</tr>}
     </tbody>
 </table>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

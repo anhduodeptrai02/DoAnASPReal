@@ -25,9 +25,10 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // GET: Admin/SanPhamModels
         public async Task<IActionResult> Index()
         {
-
+            ViewData["Ten"] = new SelectList(_context.LoaiSanPham, "MaLoai", "Ten");
             var dPcontext = _context.SanPham.Where(m => m.TrangThai==1);
-            return View(await dPcontext.ToListAsync());
+            ViewBag.DSSanPham = dPcontext;
+            return View();
         }
 
         // GET: Admin/SanPhamModels/Details/5

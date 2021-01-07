@@ -23,7 +23,10 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // GET: Admin/Users
         public async Task<IActionResult> Index()
         {
-            return View(await _context.User.ToListAsync());
+            var DS = from m in _context.User
+                     select m;
+            ViewBag.DSUsers = DS;
+            return View();
         }
 
         // GET: Admin/Users/Details/5

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\HỌC KỲ 5\\ASP24-12\\DoAnASP\\DoAnASP1.csproj": {}
+    "D:\\DoAn31-12\\DoAnASP\\DoAnASP1.csproj": {}
   },
   "projects": {
-    "D:\\HỌC KỲ 5\\ASP24-12\\DoAnASP\\DoAnASP1.csproj": {
+    "D:\\DoAn31-12\\DoAnASP\\DoAnASP1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\HỌC KỲ 5\\ASP24-12\\DoAnASP\\DoAnASP1.csproj",
+        "projectUniqueName": "D:\\DoAn31-12\\DoAnASP\\DoAnASP1.csproj",
         "projectName": "DoAnASP1",
-        "projectPath": "D:\\HỌC KỲ 5\\ASP24-12\\DoAnASP\\DoAnASP1.csproj",
+        "projectPath": "D:\\DoAn31-12\\DoAnASP\\DoAnASP1.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "D:\\HỌC KỲ 5\\ASP24-12\\DoAnASP\\obj\\",
+        "outputPath": "D:\\DoAn31-12\\DoAnASP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ADMIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
