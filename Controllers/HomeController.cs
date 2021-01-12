@@ -31,11 +31,12 @@ namespace DoAnASP.NET1.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var dPcontext = _context.SanPham.Include(s => s.LoaiSP);
-            return View(await dPcontext.ToListAsync());
+            var dPcontext = from m in _context.SanPham select m;
+            ViewBag.SanPham = dPcontext;
+            return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Login()
         {
             return View();
         }

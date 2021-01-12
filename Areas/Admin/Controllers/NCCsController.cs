@@ -23,7 +23,10 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // GET: Admin/NCCs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.NCC.ToListAsync());
+            var DS = from m in _context.NCC
+                     select m;
+            ViewBag.DSNCC = DS;
+            return View();
         }
 
         // GET: Admin/NCCs/Details/5
