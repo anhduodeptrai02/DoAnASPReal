@@ -38,6 +38,8 @@
             </td>
             <td>
                 <button type="button" class="btn btn-primary" data-userid="@item.UserId" data-toggle="modal" name="btn_edit_user" data-target="#EditUser">Edit</button>
+                <button type="button" class="btn btn-primary" data-userid="@item.UserId" data-toggle="modal" name="btn_delete_user" data-target="#DeleteUser">Delete</button>
+
             </td>
         </tr>
 }
@@ -82,6 +84,40 @@
                 alert('Thất bại !');
             });
         }
+        function updateUser(id) {
+            var update = {}
+            update.UserId = parseInt(id);
+            update.UserName = $("#edit_username").val();
+            update.PassWord = $("#edit_password").val();
+            update.TrangThai = $("#edit_trangthai").val();
+            console.log(update);
+            $.ajax({
+                url: "../../api/UsersApi/PutUser/" + update.UserId,
+                type: "PUT",
+                contentType: "Application/json;charset-utf-8",
+                data: JSON.stringify(update),
+                dataType: "json"
+            }).done(function (reponse) {
+                alert('Update  thành công!');
+                location.reload();
+            }).fail(function () {
+                alert('Thất bại !');
+            });
+        }
+        function deleteUser(id) {
+
+            $.ajax({
+                url: "../../api/UsersApi/DeleteUser/" + id,
+                type: "DELETE",
+                contentType: "Application/json;charset-utf-8",
+                dataType: "json"
+            }).done(function (reponse) {
+                alert('Xóa thành công!');
+                location.reload();
+            }).fail(function () {
+                alert('Thất bại !');
+            });
+        }
         $(document).ready(function () {
             $('button[name=btn_create_user]').click(function (e) {
                 addUser();
@@ -92,6 +128,16 @@
                 console.log(id);
                 getUser(id);
                 e.preventDefault;
+            });
+            $('button[name=btn_update_user]').click(function (e) {
+                var id = $("#edit_id").val();
+                updateUser(id);
+                e.preventDefault();
+            });
+            $('button[name=btn_delete_user]').click(function (e) {
+                var id = $(this).data("userid");
+                deleteUser(id);
+                e.preventDefault();
             });
         });
     </script>

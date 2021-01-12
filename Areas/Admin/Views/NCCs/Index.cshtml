@@ -1,14 +1,15 @@
-﻿@model IEnumerable<DoAnASP1.Areas.Admin.Models.NCC>
+﻿@model DoAnASP1.Areas.Admin.Models.NCC
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddNCC">Thêm</button>
 </p>
+
+
 <table class="table">
     <thead>
         <tr>
@@ -25,23 +26,154 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenNCC)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DiaChi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrangThai)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in ViewBag.DSNCC)
+        {
+<tr>
+    <td>
+        @item.TenNCC
+    </td>
+    <td>
+        @item.DiaChi
+    </td>
+    <td>
+        @item.TrangThai
+    </td>
+    <td>
+        <button type="button" class="btn btn-primary" data-nccid="@item.ID" data-toggle="modal" name="btn_edit_ncc" data-target="#EditNCC">Edit</button>
+        <button type="button" class="btn btn-primary" data-nccid="@item.ID" data-toggle="modal" name="btn_delete_ncc" data-target="#DeleteNCC">Delete</button>
+    </td>
+</tr>}
     </tbody>
 </table>
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        function addncc() {
+            var insert = {};
+            insert.TenNCC = $("#TenNCC").val();
+            insert.DiaChi = $("#DiaChi").val();
+            insert.TrangThai = $("#TrangThai").val();
+            console.log(insert);
+            $.ajax({
+                url: "../../API/NCCs/PostNCC",
+                type: "POST",
+                contentType: "Application/json;charset-utf-8",
+                data: JSON.stringify(insert),
+                dataType: "json"
+            }).done(function (reponse) {
+                alert('Thêm vào thành công!');
+                location.reload();
+            }).fail(function () {
+                alert('Thất bại !');
+            });
+        }
+        function deleteNcc(id) {
+
+            $.ajax({
+                url: "../../api/NCCs/DeleteNcc/" + id,
+                type: "DELETE",
+                contentType: "Application/json;charset-utf-8",
+                dataType: "json"
+            }).done(function (reponse) {
+                alert('Xóa thành công!');
+                location.reload();
+            }).fail(function () {
+                alert('Thất bại !');
+            });
+        }
+        $(document).ready(function () {
+            $('button[name=btn_create_ncc]').click(function (e) {
+                addncc();
+                e.preventDefault;
+            });
+            $('button[name=btn_delete_ncc]').click(function (e) {
+                var id = $(this).data("ID");
+                deleteNcc(id);
+                e.preventDefault();
+            });
+        });
+
+
+
+
+
+
+
+        </script>
+   } <div class="modal fade" id="EditNCC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Sửa NCC</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" id="edit_id" asp-for="ID" />
+                    <div class="form-group">
+                        <label asp-for="TenNCC" class="control-label"></label>
+                        <input asp-for="TenNCC" id="edit_tenncc" class="form-control" />
+                        <span asp-validation-for="TenNCC" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DiaChi" class="control-label"></label>
+                        <input asp-for="DiaChi" id="edit_diachi" class="form-control" />
+                        <span asp-validation-for="DiaChi" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TrangThai" class="control-label"></label>
+                        <input asp-for="TrangThai" id="edit_trangthai" class="form-control" />
+                        <span asp-validation-for="TrangThai" class="text-danger"></span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" name="btn_update_ncc" class="btn btn-primary">Cập Nhật</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+     <div class="modal fade" id="AddNCC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Thêm NCC</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body">
+                     <form>
+                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                       
+                         <div class="form-group">
+                             <label asp-for="TenNCC" class="control-label"></label>
+                             <input asp-for="TenNCC" id="TenNCC" class="form-control" />
+                             <span asp-validation-for="TenNCC" class="text-danger"></span>
+                         </div>
+                         <div class="form-group">
+                             <label asp-for="DiaChi" class="control-label"></label>
+                             <input asp-for="DiaChi" id="DiaChi" class="form-control" />
+                             <span asp-validation-for="DiaChi" class="text-danger"></span>
+                         </div>
+                         <div class="form-group">
+                             <label asp-for="TrangThai" class="control-label"></label>
+                             <input asp-for="TrangThai" id="TrangThai" class="form-control" />
+                             <span asp-validation-for="TrangThai" class="text-danger"></span>
+                         </div>
+                     </form>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                     <button type="button" name="btn_create_ncc" class="btn btn-primary">Thêm Mới</button>
+                 </div>
+             </div>
+         </div>
+     </div>
