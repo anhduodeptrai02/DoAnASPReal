@@ -1,4 +1,4 @@
-﻿@model DoAnASP1.Areas.Admin.Models.SanPhamModels
+﻿@model DoAnASP1.Areas.Admin.Models.SanPhamViewModels
 
 @{ ViewData["Title"] = "Index"; }
 
@@ -7,63 +7,72 @@
 <p>
     <a asp-action="Create">Create New</a> 
 </p>
+<form asp-controller="SanPhamModels" asp-action="Index" method="get">
+    <p>
+
+        Tên Sản Phẩm: <input type="text" asp-for="SearchString"><button type="submit" class="btn-facebook">Tìm</button>
+    </p>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TenSP)
+                @Html.DisplayNameFor(model => model.SanPhams[0].TenSP)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NgaySX)
+                @Html.DisplayNameFor(model => model.SanPhams[0].NgaySX)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hinh)
+                @Html.DisplayNameFor(model => model.SanPhams[0].Hinh)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MoTa)
+                @Html.DisplayNameFor(model => model.SanPhams[0].MoTa)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Gia)
+                @Html.DisplayNameFor(model => model.SanPhams[0].Gia)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TrangThai)
+                @Html.DisplayNameFor(model => model.SanPhams[0].TrangThai)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LoaiSP)
+                @Html.DisplayNameFor(model => model.SanPhams[0].LoaiSP)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in ViewBag.DSSanPham)
+        @foreach (var item in Model.SanPhams)
         {
-<tr>
-    <td>
-        @item.TenSP
-    </td>
-    <td>
-        @item.NgaySX
-    </td>
-    <td>
-        @item.Hinh
-    </td>
-    <td>
-        @item.MoTa
-    </td>
-    <td>
-        @item.Gia
-    </td>
-    <td>
-        @item.TrangThai
-    </td>
-    <td>
-        @item.MaLoai
-    </td>
-    <td>
-        <button type="button" class="btn btn-primary" name="btn_edit_sp" id-idsp="@item.MaSP" data-toggle="modal" data-target="#SuaSP">Sửa</button>
-        <button type="button" class="btn btn-primary" name="btn_delete_sp" id-idsp="@item.MaSP" data-toggle="modal">Xóa</button>
-    </td>
-</tr>}
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaySX)
+                </td>
+                <td>
+                    <img src="~/img/product/@Html.DisplayFor(modelItem => item.Hinh)" class="img-thumbnail" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MoTa)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaLoai)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TrangThai)
+                </td>
+                
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.MaSP">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.MaSP">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MaSP">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
 @section Scripts {

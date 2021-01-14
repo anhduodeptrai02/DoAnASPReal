@@ -68,6 +68,46 @@
                 alert('Thất bại !');
             });
         }
+
+        function getNcc(id) {
+            $.ajax({
+                url: "../../API/NCCs/GetNCC/" + id,
+                type: "GET",
+                contentType: "Application/json;charset-utf-8",
+                dataType: "json"
+            }).done(function (reponse) {
+                console.log(reponse);
+                $("#edit_id").val(reponse.id);
+                $("#edit_tenncc").val(reponse.tenNCC);
+                $("#edit_diachi").val(reponse.diaChi);
+                $("#edit_trangthai").val(reponse.trangThai);
+
+            }).fail(function () {
+                alert('Thất bại !');
+            });
+        }
+        function updateNcc(id) {
+            var update = {}
+
+            update.ID = parseInt(id);
+            update.TenNCC = $("#edit_tenncc").val();
+            update.DiaChi = $("#edit_diachi").val();
+            update.TrangThai = $("#edit_trangthai").val();
+            console.log(update);
+            $.ajax({
+                url: "../../api/NCCs/PutNCC/" + id,
+                type: "PUT",
+                contentType: "Application/json;charset-utf-8",
+                data: JSON.stringify(update),
+                dataType: "json"
+            }).done(function (reponse) {
+                alert('Update thành công!');
+                location.reload();
+            }).fail(function () {
+                alert('Thất bại !');
+            });
+        }
+
         function deleteNcc(id) {
 
             $.ajax({
@@ -88,8 +128,18 @@
                 e.preventDefault;
             });
             $('button[name=btn_delete_ncc]').click(function (e) {
-                var id = $(this).data("ID");
+                var id = $(this).data("nccid");
                 deleteNcc(id);
+                e.preventDefault();
+            });
+            $('button[name=btn_edit_ncc]').click(function (e) {
+                var id = $(this).data("nccid");
+                getNcc(id);
+                e.preventDefault();
+            });
+            $('button[name=btn_update_ncc]').click(function (e) {
+                var id = $("#edit_id").val();
+                updateNcc(id);
                 e.preventDefault();
             });
         });

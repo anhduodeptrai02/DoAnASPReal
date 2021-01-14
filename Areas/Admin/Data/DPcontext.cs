@@ -4,9 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DoAnASP1.Areas.Admin.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
 namespace DoAnASP1.Areas.Admin.Data
 {
-    public class DPcontext : DbContext
+    public class DPcontext : IdentityDbContext<IdentityUser>
     {
         public DPcontext(DbContextOptions<DPcontext> options)
             : base(options)

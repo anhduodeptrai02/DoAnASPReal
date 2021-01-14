@@ -23,12 +23,25 @@ namespace DoAnASP1.Areas.Admin.Controllers
         }
 
         // GET: Admin/SanPhamModels
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            ViewData["Ten"] = new SelectList(_context.LoaiSanPham, "MaLoai", "Ten");
-            var dPcontext = _context.SanPham.Where(m => m.TrangThai==1);
-            ViewBag.DSSanPham = dPcontext;
-            return View();
+            
+            IQueryable<string> genreQuery = from m in _context.SanPham select m.TenSP;
+            var sanphams = from m in _context.SanPham
+                           select m;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                sanphams = sanphams.Where(s => s.TenSP.Contains(searchString));
+            }
+
+            var SanPhamViewModel = new SanPhamViewModels
+            {
+                SPs = new SelectList(await genreQuery.Distinct().ToListAsync()),
+                SanPhams = await sanphams.ToListAsync()
+
+            };
+            
+            return View(SanPhamViewModel);
         }
 
         // GET: Admin/SanPhamModels/Details/5
@@ -97,7 +110,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            ViewData["MaLoai"] = new SelectList(_context.LoaiSanPham, "MaLoai", "MaLoai", sanPhamModels.MaLoai);
+            ViewData["Ten"] = new SelectList(_context.LoaiSanPham, "MaLoai", "Ten");
             return View(sanPhamModels);
         }
 
@@ -106,7 +119,7 @@ namespace DoAnASP1.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MaSP,TenSP,NgaySX,Hinh,MoTa,Gia,TrangThai,MaLoai")] SanPhamModels sanPhamModels)
+        public async Task<IActionResult> Edit(int id, [Bind("MaSP,TenSP,NgaySX,Hinh,MoTa,Gia,TrangThai,MaLoai")] SanPhamModels sanPhamModels, IFormFile ful)
         {
             if (id != sanPhamModels.MaSP)
             {
@@ -117,6 +130,14 @@ namespace DoAnASP1.Areas.Admin.Controllers
             {
                 try
                 {
+                    await _context.SaveChangesAsync();
+                    var path = Path.Combine(
+                       Directory.GetCurrentDirectory(), "wwwroot/img/product", sanPhamModels.MaSP + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1]);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await ful.CopyToAsync(stream);
+                    }
+                    sanPhamModels.Hinh = sanPhamModels.MaSP + "." + ful.FileName.Split(".")[ful.FileName.Split(".").Length - 1];
                     _context.Update(sanPhamModels);
                     await _context.SaveChangesAsync();
                 }
